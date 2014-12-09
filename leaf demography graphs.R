@@ -6,10 +6,10 @@
 
 
 ###Set working directory
-setwd('/Users/lalbert/Documents/Amazon research/summer 2012 TNF/ESA talk 2013/Demography analysis for ESA talk')
+setwd('/Users/lalbert/Documents/Amazon research/AGU 2014 poster/Analysis for AGU 2014/Leaf_demography_R_Code')
 
 ###Controllable Options
-input="Leaf Metrics Data Organization (Final)+sums+date-filled.csv"
+input="Leaf Metrics Data Organization (Final) copy (version 3)_copy2.csv"
 #Note: some column numbers are referenced below, so look for the hard-coding if input file changes.
 #Choose a species for graph in graphing section because code is set up to graph one tree at a time
 
@@ -22,7 +22,7 @@ summary(Dem.data)
 
 ###Exclude rows marked for exclusion
 #Dem.dat.1Br<- Dem.data[-which(is.na(Dem.data$Date)), ] #from when I excluded all but first row for a day, which had the date
-Dem.dat.1Br<-Dem.data[-which(Dem.data$Excluded.for.ESA.Talk=='X'), ]
+Dem.dat.1Br<-Dem.data[-which(Dem.data$Excluded.QC=='X'), ]
 # Dem.dat.1m<-Dem.dat.1Br[which(Dem.dat.1Br$Branch.was.1.meter=='X'), ] #do this after calculating other columns
 # Check that exclusion worked
 #View(Dem.dat.1Br)
@@ -41,7 +41,7 @@ hist(Dem.dat.1Br$R.dates, breaks=30)
 summary(Dem.dat.1Br)
 
 ###Sum of all leaves for a collection day
-Dem.dat.1Br$L.sum<-rowSums(Dem.dat.1Br[ ,c(6:18)])
+Dem.dat.1Br$L.sum<-rowSums(Dem.dat.1Br[ ,c(11:24)])
 
 ###Group Y1, Y1/Y2, Y2, Y3, Y and Y/M together.  (These groupings may change with a future ASD by leaf age model)
 Dem.dat.1Br$Y.sum<-rowSums(Dem.dat.1Br[ ,c(6:11)])
@@ -63,7 +63,7 @@ Dem.dat.1Br$O.prop<-Dem.dat.1Br$O.sum/Dem.dat.1Br$L.sum
 Dem.dat.1Br$QC.check<-Dem.dat.1Br$Y.prop+Dem.dat.1Br$M.prop+Dem.dat.1Br$O.prop
 
 #Create df with only 1 meter branches
-Dem.dat.1m<-Dem.dat.1Br[which(Dem.dat.1Br$Branch.was.1.meter=='X'), ]
+Dem.dat.1m<-Dem.dat.1Br[-which(Dem.dat.1Br$Excluded.Branch.Length=='X'), ]
 
 #Subsetting the data for each species for all non-excluded branches
 tr9<-subset(Dem.dat.1Br, tag..=='9')
@@ -94,6 +94,15 @@ tr500.sun.1m<-subset(tr500.1m, Sun.Shade=='sun')
 tr504.sun.1m<-subset(tr504.1m, Sun.Shade=='sun')
 tr118.sun.1m<-subset(tr118.1m, Sun.Shade=='sun')
 tr11.sun.1m<-subset(tr11.1m, Sun.Shade=='sun')
+
+#Subsetting by light level, all species, all non-excluded branches
+sun.light<-subset(Dem.dat.1Br, Sun.Shade=='sun')
+shade.light<-subset(Dem.dat.1Br, Sun.Shade=='shade')
+high.light<-subset(Dem.dat.1Br, Sun.Shade=='high')
+low.light<-subset(Dem.dat.1Br, Sun.Shade=='low')
+MC.light<-subset(Dem.dat.1Br, Sun.Shade=='MC')
+US.light<-subset(Dem.dat.1Br, Sun.Shade=='US')
+all.light<-rbind(sun.light,shade.light,high.light,low.light,MC.light,US.light)
 
 ###Make graphs
 ###Point and line graph of proportion of each age class over time
