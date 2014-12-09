@@ -75,11 +75,11 @@ tr11<-subset(Dem.dat.1Br, tag..=='11')
 all<-rbind(tr9,tr500,tr504,tr118,tr11)
 
 #Subsetting the data for each species for all non-excluded, 1 meter branches
-tr9.1m<-subset(Dem.dat.1m, tag..=='9')
-tr500.1m<-subset(Dem.dat.1m, tag..=='500')
-tr504.1m<-subset(Dem.dat.1m, tag..=='504')
-tr118.1m<-subset(Dem.dat.1m, tag..=='118')
-tr11.1m<-subset(Dem.dat.1m, tag..=='11')
+tr9.1m<-subset(Dem.dat.1m, tag..=='TR9_')
+tr500.1m<-subset(Dem.dat.1m, tag..=='TR500_')
+tr504.1m<-subset(Dem.dat.1m, tag..=='TR504_')
+tr118.1m<-subset(Dem.dat.1m, tag..=='TR118_')
+tr11.1m<-subset(Dem.dat.1m, tag..=='TR11_')
 
 #Subsetting each species subset to include sun branches for all non-excluded branches
 tr9.sun<-subset(tr9, Sun.Shade=='sun')
@@ -112,8 +112,8 @@ require(ggplot2)
 require(grid)
 
 #Choose a species for the two graphs (proportion of ages graph and sum of leaves graph)
-sp<-tr9.sun.1m
-#sp1<-tr504.sun.1m
+#sp<-tr9.sun.1m
+sp1<-tr504.sun.1m
 species<-"Erisma Sun leaves 1m"
 
 ###Point and line graph of leaf number on 1 meter branch over time
