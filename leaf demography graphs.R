@@ -41,18 +41,18 @@ hist(Dem.dat.1Br$R.dates, breaks=30)
 summary(Dem.dat.1Br)
 
 ###Sum of all leaves for a collection day
-Dem.dat.1Br$L.sum<-rowSums(Dem.dat.1Br[ ,c(11:24)])
+Dem.dat.1Br$L.sum<-rowSums(Dem.dat.1Br[ ,c(12:24)])
 
-###Group Y1, Y1/Y2, Y2, Y3, Y and Y/M together.  (These groupings may change with a future ASD by leaf age model)
-Dem.dat.1Br$Y.sum<-rowSums(Dem.dat.1Br[ ,c(6:11)])
+###Group Y1, Y1/Y2, Y2, Y3, and Y together.  (These groupings may change with a future ASD by leaf age model)
+Dem.dat.1Br$Y.sum<-rowSums(Dem.dat.1Br[ ,c(12:15)])
 
-###Group M1, M2, M, M/O together.  (These groupings may change with a future ASD by leaf age model)
-Dem.dat.1Br$M.sum<-rowSums(Dem.dat.1Br[ ,c(12:15)])
+###Group M1, M2, M, M/O, and Y/M together.  (These groupings may change with a future ASD by leaf age model)
+Dem.dat.1Br$M.sum<-rowSums(Dem.dat.1Br[ ,c(16:18)])
 
-###Group O1. O2 and O together.  (These groupings may change with a future ASD by leaf age model)
+###Group O1. O2 M3 and O together.  (These groupings may change with a future ASD by leaf age model)
 #(For future analyses, check if "O1" referred to most recent old cohort.  If so, maybe it should
 #be grouped with "O" and "O2" should be seperate).
-Dem.dat.1Br$O.sum<-rowSums(Dem.dat.1Br[ ,c(16:18)])
+Dem.dat.1Br$O.sum<-rowSums(Dem.dat.1Br[ ,c(19:24)])
 
 ###Calculate proportions belonging to each age cohort (Y, M, or O)
 Dem.dat.1Br$Y.prop<-Dem.dat.1Br$Y.sum/Dem.dat.1Br$L.sum
