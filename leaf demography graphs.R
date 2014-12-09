@@ -37,6 +37,9 @@ sum(is.na(Dem.dat.1Br$Date))
 Dem.dat.1Br$R.dates <- as.Date(Dem.dat.1Br$Date, "%m.%d.%Y")
 hist(Dem.dat.1Br$R.dates, breaks=30)
 
+###Add day of year (doy) column
+Dem.dat.1Br$DOY<-yday(Dem.dat.1Br$R.dates)
+
 ###Get rid of any non-numeric values before analysis, and make sure class is numeric for leaf counts
 summary(Dem.dat.1Br)
 
@@ -128,6 +131,7 @@ tl_final <- tl_axes + opts(panel.grid.major = theme_blank(),
                 title=species,
                 axis.text.x = theme_text(size = 11),
                 axis.text.y = theme_text(size = 11))
+  
 tl_final
 
 ###Point and line graph of proportion of leaves of different ages on branch over time
@@ -141,11 +145,14 @@ tymo<-tym+geom_point(aes(x = R.dates, y = O.prop), color='tan4', size=4)+
   stat_smooth(aes(x = R.dates, y = O.prop), method = "loess", se = FALSE, colour="tan4")
 tymo_axes<-tymo +  scale_x_date("Date") +
   scale_y_continuous("Proportion of leaves on sampled 1 meter branches", limits = c(0, 1))+theme_bw()
-tymo_final <- tymo_axes + opts(panel.grid.major = theme_blank(), 
-                               panel.grid.minor = theme_blank(),
-                               title=species,
-                               axis.text.x = theme_text(size = 11),
-                               axis.text.y = theme_text(size = 11))
+tymo_theme <-tymo_axes + theme(panel.grid.major = element_blank(), 
+                           panel.grid.minor = element_blank(),
+                           axis.text.x = element_text(size = 11),
+                           axis.text.y = element_text(size = 11),
+                           legend.title = element_blank(),
+                           legend.text = element_text(size=12))
+tymo_final<-tymo_theme+ggtitle(species)
+
 tymo_final
 
 ########################################################################################
