@@ -1,7 +1,15 @@
 #Loren Albert, summer 2013
 # Updated December 2014
 #This script is to make graphs of percentage of leaves at different ages through the dry season
-#Do search for words "check" and "note" before using for future analyses.
+# 
+# To fix:
+# Do search for words "check" and "note" before using for future analyses.
+# Make sure that any column numbers referenced below (hard-coded) are correct if input changes
+# Right now: Choose a species for graph in graphing section because code is set up to graph one tree at a time
+# so make it a function instead?
+# Note: I edited this script (spring 2016) and changed the header and demography data source.  I think I successfully
+# reverted it to the version used for AGU 2014.
+#
 # Resources:
      # Making date format recognized by R: http://stackoverflow.com/questions/11891321/convert-factor-to-date-in-r
 
@@ -14,7 +22,6 @@ setwd('/Users/lalbert/Documents/Amazon research/AGU 2014 poster/Analysis for AGU
 ###Controllable Options
 input="Leaf Metrics Data Organization (Final) copy (version 3)_copy2_LPA.csv"
 #Note: some column numbers are referenced below, so look for the hard-coding if input file changes.
-#Choose a species for graph in graphing section because code is set up to graph one tree at a time
 
 ###Import data
 Dem.data<-read.csv(input, header=TRUE, na.strings=c("","n/a"))
